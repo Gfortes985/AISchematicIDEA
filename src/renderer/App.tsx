@@ -14,6 +14,10 @@ export const App: React.FC = () => {
   const [project, setProject] = useState(circuitStore.getState());
   const [selectedId, setSelectedId] = useState<string>();
   const [preview, setPreview] = useState<string[]>([]);
+<<<<<<< codex/develop-desktop-schematic-editor-application-xlg5x5
+  const [aiError, setAiError] = useState<string>('');
+=======
+>>>>>>> main
 
   useEffect(() => circuitStore.subscribe(setProject), []);
 
@@ -26,6 +30,29 @@ export const App: React.FC = () => {
   const selected = project.components.find((c) => c.id === selectedId);
 
   const askAi = async (prompt: string) => {
+<<<<<<< codex/develop-desktop-schematic-editor-application-xlg5x5
+    setAiError('');
+    const key = import.meta.env.VITE_OPENAI_API_KEY;
+    if (!key) {
+      setAiError('VITE_OPENAI_API_KEY is not set. Configure it in your environment.');
+      return;
+    }
+
+    try {
+      const service = new AiService(key);
+      const response = await service.requestEdit(prompt, project);
+      if (response.mode === 'full_project' && response.fullProject) {
+        setPreview(['Replace full project']);
+        circuitStore.replaceProject(response.fullProject);
+      }
+      if (response.mode === 'edit_operations' && response.editOperations) {
+        setPreview(buildPreviewDiff(response.editOperations));
+        const commands = mapOperationsToCommands(response.editOperations);
+        circuitStore.dispatchBatch(commands);
+      }
+    } catch (error) {
+      setAiError(error instanceof Error ? error.message : 'Unknown AI error');
+=======
     const key = process.env.OPENAI_API_KEY;
     if (!key) return;
     const service = new AiService(key);
@@ -38,11 +65,16 @@ export const App: React.FC = () => {
       setPreview(buildPreviewDiff(response.editOperations));
       const commands = mapOperationsToCommands(response.editOperations);
       circuitStore.dispatchBatch(commands);
+>>>>>>> main
     }
   };
 
   return (
+<<<<<<< codex/develop-desktop-schematic-editor-application-xlg5x5
+    <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr 280px 320px', gap: 10, padding: 10 }}>
+=======
     <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr 280px 320px', gap: 10 }}>
+>>>>>>> main
       <ComponentLibraryPanel onAdd={addComponent} />
       <div>
         <div>
@@ -55,7 +87,14 @@ export const App: React.FC = () => {
         <SchematicCanvas project={project} onSelect={setSelectedId} />
       </div>
       <PropertiesPanel component={selected} onUpdate={(patch) => selected && circuitStore.dispatch(new UpdateComponentCommand(selected.id, patch))} />
+<<<<<<< codex/develop-desktop-schematic-editor-application-xlg5x5
+      <div>
+        <AIPanel onAsk={askAi} preview={preview} />
+        {aiError ? <p style={{ color: 'crimson' }}>{aiError}</p> : null}
+      </div>
+=======
       <AIPanel onAsk={askAi} preview={preview} />
+>>>>>>> main
     </div>
   );
 };
