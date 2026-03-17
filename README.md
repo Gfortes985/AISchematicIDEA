@@ -22,11 +22,19 @@ npm -v
 2. (Опционально) задайте ключ OpenAI для AI-панели:
    - Linux/macOS:
      ```bash
+<<<<<<< codex/develop-desktop-schematic-editor-application-xlg5x5
      export VITE_OPENAI_API_KEY="your_api_key"
      ```
    - Windows PowerShell:
      ```powershell
      $env:VITE_OPENAI_API_KEY="your_api_key"
+=======
+     export OPENAI_API_KEY="your_api_key"
+     ```
+   - Windows PowerShell:
+     ```powershell
+     $env:OPENAI_API_KEY="your_api_key"
+>>>>>>> main
      ```
 
 ## Запуск проекта
