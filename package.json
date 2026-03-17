@@ -11,8 +11,14 @@
     "build": "npm run build:main && npm run build:renderer",
     "build:main": "tsc -p tsconfig.main.json",
     "build:renderer": "vite build",
+<<<<<<< codex/develop-desktop-schematic-editor-application-9ixp5x
+    "start": "npm run build && npm run start:app",
+    "test": "vitest run",
+    "start:app": "electron ."
+=======
     "start": "electron .",
     "test": "vitest run"
+>>>>>>> main
   },
   "dependencies": {
     "electron": "^31.0.0",
