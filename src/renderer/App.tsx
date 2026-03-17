@@ -15,6 +15,7 @@ export const App: React.FC = () => {
   const [selectedId, setSelectedId] = useState<string>();
   const [preview, setPreview] = useState<string[]>([]);
   const [aiError, setAiError] = useState<string>('');
+  const [aiError, setAiError] = useState<string>('');
 
   useEffect(() => circuitStore.subscribe(setProject), []);
 
@@ -52,6 +53,7 @@ export const App: React.FC = () => {
   };
 
   return (
+    <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr 280px 320px', gap: 10, padding: 10 }}>
     <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr 280px 320px', gap: 10, padding: 10 }}>
       <ComponentLibraryPanel onAdd={addComponent} />
       <div>

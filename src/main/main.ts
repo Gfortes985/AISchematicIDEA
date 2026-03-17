@@ -1,17 +1,25 @@
+<<<<<<< codex/develop-desktop-schematic-editor-application-9ixp5x
 import { app, BrowserWindow, dialog } from 'electron';
 import fs from 'node:fs';
+=======
+import { app, BrowserWindow } from 'electron';
+>>>>>>> main
 import path from 'node:path';
 
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 1600,
     height: 900,
+<<<<<<< codex/develop-desktop-schematic-editor-application-9ixp5x
     backgroundColor: '#1f2937',
+=======
+>>>>>>> main
     webPreferences: {
       preload: path.join(__dirname, '../preload/preload.js')
     }
   });
 
+<<<<<<< codex/develop-desktop-schematic-editor-application-9ixp5x
   win.webContents.on('did-fail-load', (_event, code, description, validatedUrl) => {
     console.error(`[Renderer load failed] code=${code}, description=${description}, url=${validatedUrl}`);
   });
@@ -40,6 +48,14 @@ const createWindow = () => {
   }
 
   win.loadFile(rendererHtml);
+=======
+  const devUrl = process.env.ELECTRON_RENDERER_URL;
+  if (devUrl) {
+    win.loadURL(devUrl);
+  } else {
+    win.loadFile(path.join(__dirname, '../renderer/index.html'));
+  }
+>>>>>>> main
 };
 
 app.whenReady().then(createWindow);
