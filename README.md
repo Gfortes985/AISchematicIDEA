@@ -22,11 +22,31 @@ npm -v
 2. (Опционально) задайте ключ OpenAI для AI-панели:
    - Linux/macOS:
      ```bash
+<<<<<<< codex/develop-desktop-schematic-editor-application-8gj66h
+=======
+<<<<<<< codex/develop-desktop-schematic-editor-application-9ixp5x
+=======
+<<<<<<< codex/develop-desktop-schematic-editor-application-xlg5x5
+>>>>>>> main
+>>>>>>> main
      export VITE_OPENAI_API_KEY="your_api_key"
      ```
    - Windows PowerShell:
      ```powershell
      $env:VITE_OPENAI_API_KEY="your_api_key"
+<<<<<<< codex/develop-desktop-schematic-editor-application-8gj66h
+=======
+<<<<<<< codex/develop-desktop-schematic-editor-application-9ixp5x
+=======
+=======
+     export OPENAI_API_KEY="your_api_key"
+     ```
+   - Windows PowerShell:
+     ```powershell
+     $env:OPENAI_API_KEY="your_api_key"
+>>>>>>> main
+>>>>>>> main
+>>>>>>> main
      ```
 
 ## Запуск проекта
@@ -61,6 +81,10 @@ npm run test
 ## Документация
 - Архитектура: `docs/ARCHITECTURE.md`
 - Структура файлов: `docs/FILE_STRUCTURE.md`
+<<<<<<< codex/develop-desktop-schematic-editor-application-8gj66h
+=======
+<<<<<<< codex/develop-desktop-schematic-editor-application-9ixp5x
+>>>>>>> main
 
 ## Почему может быть белый экран
 Чаще всего причина в том, что запускается Electron без собранного renderer-бандла.
@@ -75,3 +99,8 @@ npm run test
 Если экран всё ещё пустой:
 - откройте DevTools: `Ctrl+Shift+I`
 - проверьте ошибки в консоли renderer и в терминале Electron
+<<<<<<< codex/develop-desktop-schematic-editor-application-8gj66h
+=======
+=======
+>>>>>>> main
+>>>>>>> main
