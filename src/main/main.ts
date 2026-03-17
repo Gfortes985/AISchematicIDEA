@@ -10,7 +10,16 @@ const createWindow = () => {
     }
   });
 
-  win.loadFile(path.join(__dirname, '../renderer/index.html'));
+  const devUrl = process.env.ELECTRON_RENDERER_URL;
+  if (devUrl) {
+    win.loadURL(devUrl);
+  } else {
+    win.loadFile(path.join(__dirname, '../renderer/index.html'));
+  }
 };
 
 app.whenReady().then(createWindow);
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});
