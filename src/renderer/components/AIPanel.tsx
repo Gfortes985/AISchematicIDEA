@@ -5,10 +5,13 @@ export const AIPanel: React.FC<{ onAsk: (prompt: string) => Promise<void>; previ
   return (
     <div>
       <h3>AI Editor</h3>
-      <textarea value={text} onChange={(e) => setText(e.target.value)} rows={5} />
-      <button onClick={() => onAsk(text)}>Apply AI command</button>
-      <h4>Preview diff</h4>
-      <ul>{preview.map((d, i) => <li key={i}>{d}</li>)}</ul>
+      <div className="field">
+        <label className="muted">Prompt</label>
+        <textarea value={text} onChange={(e) => setText(e.target.value)} rows={6} />
+      </div>
+      <button className="btn" onClick={() => onAsk(text)}>Apply AI command</button>
+      <h4 style={{ marginTop: 14 }}>Preview diff</h4>
+      <ul className="ai-list">{preview.map((d, i) => <li key={i}>{d}</li>)}</ul>
     </div>
   );
 };

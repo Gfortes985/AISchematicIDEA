@@ -1,14 +1,11 @@
 import { app, BrowserWindow, dialog } from 'electron';
 import fs from 'node:fs';
-import { app, BrowserWindow, dialog } from 'electron';
-import fs from 'node:fs';
 import path from 'node:path';
 
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 1600,
     height: 900,
-    backgroundColor: '#1f2937',
     backgroundColor: '#1f2937',
     webPreferences: {
       preload: path.join(__dirname, '../preload/preload.js')
@@ -18,8 +15,6 @@ const createWindow = () => {
   win.webContents.on('did-fail-load', (_event, code, description, validatedUrl) => {
     console.error(`[Renderer load failed] code=${code}, description=${description}, url=${validatedUrl}`);
     if (!win.webContents.isDevToolsOpened()) win.webContents.openDevTools({ mode: 'detach' });
-  win.webContents.on('did-fail-load', (_event, code, description, validatedUrl) => {
-    console.error(`[Renderer load failed] code=${code}, description=${description}, url=${validatedUrl}`);
   });
 
   win.webContents.on('render-process-gone', (_event, details) => {
@@ -47,7 +42,7 @@ const createWindow = () => {
 
   win.loadFile(rendererHtml);
 };
-                     
+
 app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {

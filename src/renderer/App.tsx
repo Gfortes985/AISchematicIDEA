@@ -52,22 +52,27 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr 280px 320px', gap: 10, padding: 10 }}>
+    <div className="app-shell">
       <ComponentLibraryPanel onAdd={addComponent} />
-      <div>
-        <div>
-          <button onClick={() => selected && circuitStore.dispatch(new RemoveComponentCommand(selected.id))}>Delete</button>
-          <button onClick={() => selected && circuitStore.dispatch(new MoveComponentCommand(selected.id, { x: selected.position.x + 10, y: selected.position.y + 10 }))}>Move</button>
-          <button onClick={() => selected && circuitStore.dispatch(new RotateComponentCommand(selected.id, ((selected.orientation + 90) % 360) as 0 | 90 | 180 | 270))}>Rotate</button>
-          <button onClick={() => circuitStore.undo()}>Undo</button>
-          <button onClick={() => circuitStore.redo()}>Redo</button>
+
+      <div className="panel">
+        <div className="toolbar">
+          <button className="btn btn-danger" onClick={() => selected && circuitStore.dispatch(new RemoveComponentCommand(selected.id))}>Delete</button>
+          <button className="btn" onClick={() => selected && circuitStore.dispatch(new MoveComponentCommand(selected.id, { x: selected.position.x + 10, y: selected.position.y + 10 }))}>Move</button>
+          <button className="btn" onClick={() => selected && circuitStore.dispatch(new RotateComponentCommand(selected.id, ((selected.orientation + 90) % 360) as 0 | 90 | 180 | 270))}>Rotate</button>
+          <button className="btn" onClick={() => circuitStore.undo()}>Undo</button>
+          <button className="btn" onClick={() => circuitStore.redo()}>Redo</button>
         </div>
-        <SchematicCanvas project={project} onSelect={setSelectedId} />
+        <div className="canvas-wrap">
+          <SchematicCanvas project={project} onSelect={setSelectedId} />
+        </div>
       </div>
+
       <PropertiesPanel component={selected} onUpdate={(patch) => selected && circuitStore.dispatch(new UpdateComponentCommand(selected.id, patch))} />
-      <div>
+
+      <div className="panel">
         <AIPanel onAsk={askAi} preview={preview} />
-        {aiError ? <p style={{ color: 'crimson' }}>{aiError}</p> : null}
+        {aiError ? <p className="error">{aiError}</p> : null}
       </div>
     </div>
   );
