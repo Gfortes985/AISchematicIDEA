@@ -19,12 +19,22 @@ body {
   color: var(--text);
 }
 
+.app-root { height: 100%; padding: 12px; display: grid; grid-template-rows: auto 1fr; gap: 12px; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar h2 { margin: 0; }
+.topbar p { margin: 4px 0 0; }
+.topbar-stats { display: flex; gap: 8px; flex-wrap: wrap; }
+
 .app-shell {
   display: grid;
-  grid-template-columns: 250px 1fr 300px 330px;
+  grid-template-columns: minmax(260px, 310px) 1fr minmax(280px, 320px) minmax(300px, 340px);
   gap: 12px;
-  height: 100%;
-  padding: 12px;
+  min-height: 0;
 }
 
 .panel {
@@ -33,15 +43,26 @@ body {
   border-radius: 12px;
   padding: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  min-height: 0;
 }
 
 .panel h3, .panel h4 { margin: 0 0 12px; }
 .muted { color: var(--muted); }
+.badge {
+  border: 1px solid #335085;
+  background: rgba(79,140,255,0.14);
+  color: #b9d0ff;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.panel-header-row { display: flex; align-items: center; justify-content: space-between; }
 
 .toolbar {
   display: flex;
   gap: 8px;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -55,10 +76,38 @@ body {
 .btn:hover { border-color: var(--accent-2); }
 .btn-danger { border-color: #5f2d39; color: #ffd8df; background: #311a21; }
 
+.library-panel { display: grid; grid-template-rows: auto auto 1fr; overflow: hidden; }
 .library-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.component-card {
+  border: 1px solid var(--border);
+  background: #0f1a31;
+  color: #d9e6ff;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  min-width: 0;
+}
+.component-card:hover { border-color: var(--accent-2); transform: translateY(-1px); }
+.component-icon {
+  display: block;
+  width: 100%;
+  height: 42px;
+  color: #84b2ff;
+  margin-bottom: 8px;
+}
+.component-name {
+  display: block;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .field {

@@ -52,27 +52,41 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="app-shell">
-      <ComponentLibraryPanel onAdd={addComponent} />
-
-      <div className="panel">
-        <div className="toolbar">
-          <button className="btn btn-danger" onClick={() => selected && circuitStore.dispatch(new RemoveComponentCommand(selected.id))}>Delete</button>
-          <button className="btn" onClick={() => selected && circuitStore.dispatch(new MoveComponentCommand(selected.id, { x: selected.position.x + 10, y: selected.position.y + 10 }))}>Move</button>
-          <button className="btn" onClick={() => selected && circuitStore.dispatch(new RotateComponentCommand(selected.id, ((selected.orientation + 90) % 360) as 0 | 90 | 180 | 270))}>Rotate</button>
-          <button className="btn" onClick={() => circuitStore.undo()}>Undo</button>
-          <button className="btn" onClick={() => circuitStore.redo()}>Redo</button>
+    <div className="app-root">
+      <header className="topbar panel">
+        <div>
+          <h2>Schematic Studio</h2>
+          <p className="muted">Interactive editor + AI assistant</p>
         </div>
-        <div className="canvas-wrap">
-          <SchematicCanvas project={project} onSelect={setSelectedId} />
+        <div className="topbar-stats">
+          <span className="badge">Components: {project.components.length}</span>
+          <span className="badge">Wires: {project.wires.length}</span>
+          <span className="badge">Nets: {project.nets.length}</span>
         </div>
-      </div>
+      </header>
 
-      <PropertiesPanel component={selected} onUpdate={(patch) => selected && circuitStore.dispatch(new UpdateComponentCommand(selected.id, patch))} />
+      <div className="app-shell">
+        <ComponentLibraryPanel onAdd={addComponent} />
 
-      <div className="panel">
-        <AIPanel onAsk={askAi} preview={preview} />
-        {aiError ? <p className="error">{aiError}</p> : null}
+        <div className="panel">
+          <div className="toolbar">
+            <button className="btn btn-danger" onClick={() => selected && circuitStore.dispatch(new RemoveComponentCommand(selected.id))}>Delete</button>
+            <button className="btn" onClick={() => selected && circuitStore.dispatch(new MoveComponentCommand(selected.id, { x: selected.position.x + 10, y: selected.position.y + 10 }))}>Move</button>
+            <button className="btn" onClick={() => selected && circuitStore.dispatch(new RotateComponentCommand(selected.id, ((selected.orientation + 90) % 360) as 0 | 90 | 180 | 270))}>Rotate</button>
+            <button className="btn" onClick={() => circuitStore.undo()}>Undo</button>
+            <button className="btn" onClick={() => circuitStore.redo()}>Redo</button>
+          </div>
+          <div className="canvas-wrap">
+            <SchematicCanvas project={project} onSelect={setSelectedId} />
+          </div>
+        </div>
+
+        <PropertiesPanel component={selected} onUpdate={(patch) => selected && circuitStore.dispatch(new UpdateComponentCommand(selected.id, patch))} />
+
+        <div className="panel">
+          <AIPanel onAsk={askAi} preview={preview} />
+          {aiError ? <p className="error">{aiError}</p> : null}
+        </div>
       </div>
     </div>
   );
