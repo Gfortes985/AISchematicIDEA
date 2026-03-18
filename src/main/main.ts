@@ -1,6 +1,8 @@
-import { app, BrowserWindow, dialog } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import fs from 'node:fs';
 import path from 'node:path';
+import { AiService } from '../core/ai/aiService';
+import { CircuitProject } from '../core/model/types';
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -42,6 +44,16 @@ const createWindow = () => {
 
   win.loadFile(rendererHtml);
 };
+
+ipcMain.handle('ai:request-edit', async (_event, payload: { prompt: string; project: CircuitProject }) => {
+  const key = process.env.OPENAI_API_KEY;
+  if (!key) {
+    throw new Error('OPENAI_API_KEY is not set in main process environment');
+  }
+
+  const service = new AiService(key);
+  return service.requestEdit(payload.prompt, payload.project);
+});
 
 app.whenReady().then(createWindow);
 

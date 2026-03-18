@@ -19,14 +19,14 @@ npm -v
    ```bash
    npm install
    ```
-2. (Опционально) задайте ключ OpenAI для AI-панели:
+2. (Опционально) задайте ключ OpenAI для AI-панели (используется в main-process, не в браузерном renderer):
    - Linux/macOS:
      ```bash
-     export VITE_OPENAI_API_KEY="your_api_key"
+     export OPENAI_API_KEY="your_api_key"
      ```
    - Windows PowerShell:
      ```powershell
-     $env:VITE_OPENAI_API_KEY="your_api_key"
+     $env:OPENAI_API_KEY="your_api_key"
      ```
 
 ## Запуск проекта

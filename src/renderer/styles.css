@@ -95,12 +95,15 @@ body {
   min-width: 0;
 }
 .component-card:hover { border-color: var(--accent-2); transform: translateY(-1px); }
-.component-icon {
+.component-icon-img {
   display: block;
   width: 100%;
-  height: 42px;
-  color: #84b2ff;
+  height: 44px;
+  object-fit: cover;
+  object-position: left top;
+  filter: saturate(0) brightness(1.85) contrast(1.1);
   margin-bottom: 8px;
+  border-radius: 6px;
 }
 .component-name {
   display: block;
